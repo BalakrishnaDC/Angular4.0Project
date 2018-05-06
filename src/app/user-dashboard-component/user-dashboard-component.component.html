@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--binding the value to html page-->
+  <title>Welcome-{{pageName}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--websit header is common for all the component-->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <!--binding the value alogn with calling home page-->
+      <a class="navbar-brand" (click)="homeFun()">{{pageName}}</a>
+    </div>
+    <!--all the link avilablie in website and it is common for all the component-->
+    <ul class="nav navbar-nav ">
+      <!--calling different component based on the user selection-->
+      <li class="active"><a (click)="homeFun()" >HOME</a></li>
+      <li class="active"><a (click)="historyWarning()">HISTORY</a></li>
+      <li class="active"><a (click)="registrationFun()">REGISTER</a></li>
+      <li class="active"><a (click)="logInFun()">SIGN-IN</a></li>
+    </ul>
+      <!--search button-->
+    <form class="navbar-form navbar-right" action="">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" name="search">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</nav>
+
+<!--home page section and enabling the form-->
+<div class="container" *ngIf="isHomePage">
+  <!--binding the value to the html page-->
+  <div class="row">
+    <div class="col-sm-4" ></div>
+    <div class="col-sm-4" ><h3>ABOUT {{pageName}} SHOW:</h3></div>
+    <div class="col-sm-4" ></div>
+
+  </div>
+  <div>&nbsp;</div>
+
+  <p class="text-center">Superstar Mr.XYZ is back with Season 50 of Bigg Boss but with a incredible twist.
+    For the first time, Bigg Boss Kannada house opens its gates for the common man! Brace yourself for some high-voltage drama,
+    shocking controversies,
+    mushy romances and a constant tug of war between the celebrities and the non-celebrities.</p><div>&nbsp;</div>
+  <hr>
+
+  <div>&nbsp;</div>
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-sm-4" ></div>
+      <div class="col-sm-4" ><h3>MORE INFORMATION:</h3></div>
+      <div class="col-sm-4" ></div>
+
+    </div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <p class="text-center">fifth season of the Kannada television series Bigg Boss Kannada, that premiered on 15 October 2017.[1] Sudeep reprised his role as the host of the show.[2] The finale of the season took place 28 January 2018, and rapper Chandan Shetty was declared the winner of the show and was awarded the prize money of ₹50 lakh. Sales representative Diwaker was voted the runner-up.[3]
+    </p><div>&nbsp;</div>
+    <div class="row">
+      <div class="col-sm-3" ></div>
+      <!--redirect to new websit in new tab-->
+      <div class="col-sm-2 btn btn-success " ><a style="color: #ffffff" target="_blank" rel="noopener" href="https://www.voot.com/shows/bigg-boss-kannada-s05/5/541343/two-best-friends-one-winner-/564940"><h4 class="text-white">Previous Episodes</h4></a></div>
+      <div class="col-sm-1 " ></div>
+      <!--calling registration component-->
+      <div class="col-sm-2 btn btn-success" ><a style="color: #ffffff" (click)="registrationFun()"><h4>Register</h4></a></div>
+      <div class="col-sm-4" ></div>
+    </div>
+  </div>
+
+</div>
+
+<!--calling registration page component-->
+<div *ngIf="isRegistrationPage">
+  <app-user-registration-component></app-user-registration-component>
+</div>
+
+<!--calling login page component-->
+<div *ngIf="isLoginPage">
+  <app-user-login-component></app-user-login-component>
+</div>
+
+</body>
+</html>
+

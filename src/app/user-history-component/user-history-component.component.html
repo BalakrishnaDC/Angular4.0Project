@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--enabling the form-->
+<div class="container" *ngIf="isHistory">
+  <!--binding the pagename-->
+  <h2>{{pageName}}</h2>
+  <!--based on the dropdow event changes value will change-->
+  <h2>Month:{{data1}}</h2>
+  <p>The History tab is the list of participants who have registered for BigBoss game.
+    It is our main tool for managing participants and it will give more information about each participants.
+    And it also gives previous session histroy and new session details</p>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Age</th>
+      </tr>
+      </thead>
+      <tbody >
+      <!--iterating the List values using ngFor-->
+      <tr  *ngFor="let postalAdd of challanCINList; let a = index">
+        <!--mapping the list values to the tag-->
+        <td>{{a+1}}</td>
+        <td>{{postalAdd.id}}</td>
+        <td>{{postalAdd.desc}}</td>
+        <td>{{postalAdd.code}}</td>
+       </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <!--using click function opeing the new form for to add participant-->
+      <button  class="btn btn-info btn-sm " (click)="openFormAddParticipent()">Add Participant</button> &nbsp;&nbsp;
+      <!--add dropdown values for month-->
+      <button  class="btn btn-info btn-sm " (click)="openMnth()">Add Month</button>&nbsp;&nbsp;
+      <!--clearing all the opened forms-->
+      <button  class="btn btn-success btn-sm " (click)="clearAllForm()">Clear</button>
+    </div>
+
+
+    <!--enabling the form-->
+    <div class="container" *ngIf="isParticpt">
+      <div class="row">
+        <div class="col-sm-4" ></div>
+        <div class="col-sm-4" >
+        <div class="panel panel-primary-sm">
+          <div class="panel-body-sm">
+            <!--form submition and validation along with way of passing form values to the ts file -->
+            <form [formGroup] = "form" (ngSubmit) = "addParticipent(form.value)">
+            <div class="form-group">
+              <h2>Add Participant</h2>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="signupName">FirstName</label>
+              <input id="signupName" type="text"  maxlength="50" class="form-control"
+                     #signupName formControlName="signupName" value="signupName">
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="signupEmail">LastName</label>
+              <input id="signupEmail" type="text" maxlength="50" class="form-control"
+                     #signupEmail formControlName="signupEmail" value="signupEmail">
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="signupEmailagain">Age</label>
+              <input id="signupEmailagain" type="text" maxlength="50" class="form-control"
+                     #signupEmailagain formControlName="signupEmailagain" value="signupEmailagain">
+            </div>
+            <div class="form-group">
+              <!--disabling the button untill form is filled-->
+              <button id="signupSubmit" type="submit" [disabled]="!form.valid" class="btn btn-info btn-block" >Add</button>
+            </div>
+            </form>
+
+          </div>
+        </div>
+        </div>
+        <div class="col-sm-4" ></div>
+
+      </div>
+    </div>
+
+
+    <div class="container" *ngIf="addMnth">
+
+      <div class="row">
+        <div class="col-sm-4" ></div>
+        <div class="col-sm-4" >
+        <div class="panel panel-primary-sm">
+          <div class="panel-body-sm">
+              <div class="form-group">
+                <h2>Change Month</h2>
+                <!--dropdown implematation with two way binding of data1 value -->
+                <select (change)="mnthSelection($event)" name="monthList" class="form-control">
+                  <option>Select Option</option>
+                  <!--based on user selection, assign the value to data1 variable-->
+                  <option [value]="data1" *ngFor="let data1 of monthList">{{data1}}</option>
+                </select>
+              </div>
+
+
+          </div>
+        </div>
+        </div>
+        <div class="col-sm-4" ></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!--eanbling the form-->
+<div class="container" *ngIf="isLoginPage">
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <!--form submittion and validation-->
+        <form  [formGroup] = "form" (ngSubmit) = "historyFun()">
+          <div class="form-group">
+            <h2>BigBoss-SignIn</h2>
+          </div>
+          <div class="form-group" >
+            <label class="control-label" for="signupName">User Name</label>
+            <input id="signupName" [(ngModel)]="signupName"  type="text" maxlength="50"
+                   class="form-control"placeholder="Account holder name" value="signupName"
+                   formControlName="signupName" required >
+          </div>
+
+          <div class="form-group" >
+            <label class="control-label" for="signupPassword">Password</label>
+            <input id="signupPassword" type="password" maxlength="25" class="form-control"
+                   placeholder="8 character password " required length="40"
+                   formControlName="signupPassword" value="signupPassword">
+          </div>
+          <!--validation error div-->
+          <div class="alert alert-danger" *ngIf="!form.valid">
+            Please Enter UserName and Password to enable SignIn button
+          </div>
+          <div class="form-group">
+            <!--disabling the button untill form is filled -->
+            <button id="signupSubmit" type="submit" [disabled]="!form.valid" class="btn btn-info btn-block">SignIn</button>
+          </div>
+
+          <hr>
+          <!--calling the registration component-->
+          <p></p>Need an account? <a (click)="registrationFun()">Sign Up</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--calling registration page component-->
+<div *ngIf="isRegistrationPage">
+  <app-user-registration-component></app-user-registration-component>
+</div>
+<!--calling the history page component-->
+<div *ngIf="isHistory">
+  <app-user-history-component></app-user-history-component>
+</div>

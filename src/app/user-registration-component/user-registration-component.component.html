@@ -1,0 +1,52 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!--Enabling the registraion form-->
+<div class="container" *ngIf="isRegistrationPage">
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <!--Form validation and submition-->
+        <form [formGroup] = "form" (ngSubmit) = "logInFun()">
+          <div class="form-group">
+            <h2>BigBoss-SignUp</h2>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="signupName">Your name</label>
+            <input id="signupName" type="text" maxlength="50" class="form-control" formControlName="signupName" >
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="signupEmail">Email</label>
+            <input id="signupEmail" type="email" maxlength="50" class="form-control" formControlName="signupEmail" >
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="signupEmailagain">Email again</label>
+            <input id="signupEmailagain" type="email" maxlength="50" class="form-control" formControlName="signupEmailagain" >
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="signupPassword">Password</label>
+            <input id="signupPassword" type="password" maxlength="25" class="form-control" placeholder="Please enter 8 character" length="40" formControlName="signupPassword" >
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="signupPasswordagain">Password again</label>
+            <input id="signupPasswordagain" type="password" maxlength="25" class="form-control" formControlName="signupPasswordagain" >
+          </div>
+          <div class="form-group">
+            <!--disabing the button untill form is filled-->
+            <button id="signupSubmit" type="submit" [disabled]="!form.valid" class="btn btn-info btn-block" >Create your account</button>
+          </div>
+
+          <hr>
+          <!--Calling Login component-->
+          <p></p>Already have an account? <a (click)="logInFun()">Sign in</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--calling login page component-->
+<div *ngIf="isLoginPage">
+  <app-user-login-component></app-user-login-component>
+</div>
